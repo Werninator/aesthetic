@@ -77,6 +77,7 @@
     </section>
     <section class="buttons">﻿
         <button class="copy">ＣＯＰＹ</button>
+        <button class="tweet">ＴＷＥＥＴ</button>
     </section>
     <section class="footer">
         ﻿﻿ｗｅｒｎｉｎａｔｏｒ  －  
@@ -91,6 +92,7 @@
             // setting up the scene
             var textarea = document.querySelector('textarea.text');
             var copyButton = document.querySelector('button.copy');
+            var tweetButton = document.querySelector('button.tweet');
             var lookup = {'!':'！','"':'＂','#':'＃','$':'＄','%':'％','&':'＆',"'":'＇','(':'（',')':'）','*':'＊','+':'＋',',':'，','-':'－','.':'．','/':'／','0':'０','1':'１','2':'２','3':'３','4':'４','5':'５','6':'６','7':'７','8':'８','9':'９',':':'：',';':'；','<':'＜','=':'＝','>':'＞','?':'？','@':'＠','A':'Ａ','B':'Ｂ','C':'Ｃ','D':'Ｄ','E':'Ｅ','F':'Ｆ','G':'Ｇ','H':'Ｈ','I':'Ｉ','J':'Ｊ','K':'Ｋ','L':'Ｌ','M':'Ｍ','N':'Ｎ','O':'Ｏ','P':'Ｐ','Q':'Ｑ','R':'Ｒ','S':'Ｓ','T':'Ｔ','U':'Ｕ','V':'Ｖ','W':'Ｗ','X':'Ｘ','Y':'Ｙ','Z':'Ｚ','[':'［','\\':'＼',']':'］','^':'＾','_':'＿','`':'｀','a':'ａ','b':'ｂ','c':'ｃ','d':'ｄ','e':'ｅ','f':'ｆ','g':'ｇ','h':'ｈ','i':'ｉ','j':'ｊ','k':'ｋ','l':'ｌ','m':'ｍ','n':'ｎ','o':'ｏ','p':'ｐ','q':'ｑ','r':'ｒ','s':'ｓ','t':'ｔ','u':'ｕ','v':'ｖ','w':'ｗ','x':'ｘ','y':'ｙ','z':'ｚ','{':'｛','|':'｜','}':'｝'};
             var initSentences = ['Fill me in', 'Tell me how you feel', 'It is between us', '<yes> <no> <maybe>', 'start typing'];
 
@@ -106,20 +108,27 @@
                 textarea.value = chars.join('');
             }
 
-            // not so magic
-            function copy() {
-                textarea.select();
-                document.execCommand('copy');
-            }
-
             // upcoming events folks better get these ｔｉｃｋｅｔｚ
             textarea.addEventListener('keyup', aesthethisize);
             textarea.addEventListener('keydown', aesthethisize);
             textarea.addEventListener('keypress', aesthethisize);
-            copyButton.addEventListener('click', copy);
 
             // ＩＮＩＴＩＡＬ ＢＬＩＳＳ
             aesthethisize();
+
+            copyButton.addEventListener('click', function() {
+                textarea.select();
+                document.execCommand('copy');
+            });
+
+            // now with ｔｗｉｔ support
+            tweetButton.addEventListener('click', function() {
+                window.open(
+                    'http://twitter.com/home?status=' + textarea.value,
+                    '_blank',
+                    'toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400'
+                );
+            });
         })();
     </script>
 </body>
